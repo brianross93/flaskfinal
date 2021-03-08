@@ -18,10 +18,6 @@ main = Blueprint("main", __name__)
 @main.route('/')
 def home():
     """Display the web page for home"""
-    # new_user = User(username='me1', password='Casirus')
-    # db.session.add(new_user)
-    # db.session.commit()
-    # print(new_user)
     return render_template('index.html')
 
 @main.route('/albums')
@@ -50,7 +46,6 @@ def add_scraps():
         )
         db.session.add(photo)
         db.session.commit()
-        print("Hello here i am step 1")
         return redirect(url_for('main.display_album', photo_id=photo.album_id))
     return render_template('add_scraps.html', **context)
 
@@ -58,12 +53,9 @@ def add_scraps():
 def display_album(photo_id):
     """Display the web page for showing scraps in an album"""
     photo = Photos.query.get(photo_id)
-    print(photo)
     form = PhotoForm(obj=photo)
-    print(form)
-    print("we got to the display album route")
     if form.validate_on_submit():
-        print("the form is valid")
+        """If the form is valid, we want to show the added image"""
         #image, photo_name, album_id
         
         photo.image = form.image.data.filename,
@@ -78,34 +70,6 @@ def display_album(photo_id):
 
     return render_template('scraps_album.html',photo=photo, form=form)
 
-# @main.route('/item/<item_id>', methods=['GET', 'POST'])
-# def item_detail(item_id):
-#     item = GroceryItem.query.get(item_id)
-#     # Creates a GroceryItemForm and pass in `obj=item`
-#     form = GroceryItemForm(obj=item)
-
-#     # If form was submitted and was valid:
-#     # - update the GroceryItem object and save it to the database,
-#     # - flash a success message, and
-#     # - redirect the user to the item detail page.
-#     if form.validate_on_submit():
-#         new_item = GroceryItem(
-#             name=form.name.data,
-#             price=form.price.data,
-#             category=form.category.data,
-#             photo_url=form.photo_url.data,
-#             store=form.store.data
-#         )
-
-#         db.session.add(new_item)
-#         db.session.commit()
-
-#         flash('New item created')
-#         return redirect(url_for('main.item_detail', item_id=new_item.id))
-
-#     #  Sends the form to the template and use it to render the form fields
-#     item = GroceryItem.query.get(item_id)
-#     return render_template('item_detail.html', item=item)
 
 
 

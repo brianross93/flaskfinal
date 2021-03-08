@@ -64,10 +64,6 @@ def test_logged_out(self):
        
         response_text = response.get_data(as_text=True)
         self.assertIn('me2', response_text)
-        
-
-     
-
         self.assertNotIn('Favorite', response_text)
 
 def test_logout(self):
