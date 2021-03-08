@@ -25,8 +25,8 @@ class User(db.Model, UserMixin):
 class Photos(db.Model):
     ''' This is a photo model to store information about the photo'''
     id = db.Column(db.Integer, primary_key = True)
-    photo_name = db.Column(db.String(200), nullable=False, unique=True )
-    img_url = db.Column(db.String(200), nullable=False, unique=True)
+    photo_name = db.Column(db.String(2000), nullable=False, unique=True )
+    img_url = db.Column(db.String(200), nullable=False)
     album_id = db.Column(db.Integer, db.ForeignKey("albums.id"))
     user_added = db.relationship(
         'User', secondary='user_photo', back_populates='photos')

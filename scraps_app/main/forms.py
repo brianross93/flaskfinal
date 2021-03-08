@@ -8,10 +8,10 @@ from scraps_app.models import *
 
 class PhotoForm(FlaskForm):
     '''This is a Photo form where people can upload photos'''
-    image = FileField("Image", validators=[FileAllowed(["jpg", "png"])])
+    image = StringField("Image File URL")
     photo_name = StringField('Photo Name',
         validators=[DataRequired()])
-    album_id = StringField("Album ID",validators=[Length(min=3, max=50)] )
+    album_id = StringField("Album ID",validators=[Length(max=50)] )
     submit = SubmitField("Add Photo")
 
 class AlbumForm(FlaskForm):
