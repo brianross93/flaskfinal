@@ -44,14 +44,14 @@ def add_scraps():
     if form.validate_on_submit():
         
         photo = Photos(
-            img_url=form.image.data,
+            image=form.image.data,
             photo_name = form.photo_name.data,
             album_id = form.album_id.data
         )
         db.session.add(photo)
         db.session.commit()
         print("Hello here i am step 1")
-        return redirect(url_for('main.display_album', photo_id=photo.id))
+        return redirect(url_for('main.display_album', photo_id=photo.album_id))
     return render_template('add_scraps.html', **context)
 
 @main.route('/scraps_album/<photo_id>', methods=['GET', 'POST'])
@@ -65,16 +65,18 @@ def display_album(photo_id):
     if form.validate_on_submit():
         print("the form is valid")
         #image, photo_name, album_id
-        image = form.image.data.filename,
-        photo_name = form.photo_name.data,
-        album_id = form.photo_name.data
-
+        
+        photo.image = form.image.data.filename,
+        photo.photo_name = form.photo_name.data,
+        photo.album_id = form.photo_name.data
+        
         db.session.commit()
+        
         flash('Scraps were updated successfully.')
         return redirect(url_for('main.display_album', photo_id=photo.id))
 
 
-    return render_template('scraps_album.html')
+    return render_template('scraps_album.html',photo=photo, form=form)
 
 # @main.route('/item/<item_id>', methods=['GET', 'POST'])
 # def item_detail(item_id):

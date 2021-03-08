@@ -56,7 +56,7 @@
             
             <h1 class="display-4">Add Your Photo Below</h1>
             <form action="{{ url_for('main.add_scraps') }}" method="POST">
-              {{ form.csrf_token }}
+              
               <fieldset>
                   
           
@@ -64,14 +64,14 @@
               <p>{{ message }}</p>
                   {% endfor %}
           
-                  {{ form.image.label }}
-                  {{ form.image }}
+                  {{ photo.image.label }}
+                  <img src="{{ photo.image }}">
 
-                  {{form.photo_name.label}}
-                  {{form.photo_name}}
+                  {{photo.photo_name.label}}
+                  {{photo.photo_name}}
 
-                  {{form.album_id.label}}
-                  {{form.album_id}}
+                  {{photo.album_id.label}}
+                  {{photo.album_id}}
 
                   
                   <ul>
@@ -80,7 +80,7 @@
                   {% endfor %}
                   </ul>
           
-                  {{ form.submit }}
+                 
               </fieldset>
           </form>
 
